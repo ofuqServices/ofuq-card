@@ -361,14 +361,13 @@ function showCopyMessage() {
 
 
 /* =================================
-   SAVE CONTACT
+   SAVE CONTACT - ANDROID CHROME
 ================================= */
 
 const saveContact =
     document.getElementById("saveContact");
 
-
-saveContact.addEventListener("click", async () => {
+saveContact.addEventListener("click", () => {
 
     const name =
         "مكتب أُفُق متعدد الخدمات";
@@ -386,9 +385,9 @@ saveContact.addEventListener("click", async () => {
         window.location.href;
 
 
-    /* ==============================
-       إنشاء vCard
-    ============================== */
+    /*
+       إنشاء بطاقة الاتصال
+    */
 
     const vcard =
 `BEGIN:VCARD
@@ -402,108 +401,64 @@ URL:${pageUrl}
 END:VCARD`;
 
 
-    /* ==============================
-       إنشاء ملف جهة الاتصال
-    ============================== */
+    /*
+       إنشاء ملف VCF
+    */
 
     const blob =
         new Blob(
             [vcard],
             {
-                type:
-                    "text/vcard;charset=utf-8"
+                type: "text/vcard"
             }
         );
 
-
-    const file =
-        new File(
-            [blob],
-            "Afaq-Multiservices.vcf",
-            {
-                type:
-                    "text/vcard"
-            }
-        );
-
-
-    /* ==============================
-       محاولة فتح جهة الاتصال مباشرة
-       في الأجهزة التي تدعم ذلك
-    ============================== */
-
-    if (
-        navigator.share &&
-        navigator.canShare &&
-        navigator.canShare({
-            files: [file]
-        })
-    ) {
-
-        try {
-
-            await navigator.share({
-                files: [file],
-                title:
-                    "مكتب أُفُق متعدد الخدمات"
-            });
-
-            return;
-
-        }
-
-        catch (error) {
-
-            /*
-               المستخدم أغلق النافذة
-            */
-
-            if (
-                error.name ===
-                "AbortError"
-            ) {
-
-                return;
-
-            }
-
-        }
-
-    }
-
-
-    /* ==============================
-       الطريقة الاحتياطية
-       للأجهزة التي لا تدعم المشاركة
-    ============================== */
 
     const url =
         URL.createObjectURL(blob);
 
 
-    const link =
-        document.createElement("a");
+    /*
+       محاولة فتح تطبيق جهات الاتصال
+       في Android
+    */
+
+    const androidIntent =
+        `intent:#Intent;action=android.intent.action.VIEW;type=text/x-vcard;S.android.intent.extra.TEXT=${encodeURIComponent(vcard)};end`;
 
 
-    link.href =
-        url;
+    /*
+       محاولة فتح Intent
+    */
 
-    link.download =
-        "Afaq-Multiservices.vcf";
+    window.location.href =
+        androidIntent;
 
 
-    document.body.appendChild(link);
-
-    link.click();
-
-    link.remove();
-
+    /*
+       إذا لم يستجب الجهاز،
+       نستخدم الطريقة الاحتياطية
+    */
 
     setTimeout(() => {
 
+        const link =
+            document.createElement("a");
+
+        link.href = url;
+
+        link.download =
+            "Afaq-Multiservices.vcf";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.remove();
+
         URL.revokeObjectURL(url);
 
-    }, 5000);
+    }, 1500);
 
 });
 /* =================================
