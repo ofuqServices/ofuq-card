@@ -454,3 +454,74 @@ END:VCARD`;
 
     }
 );
+/* =================================
+   SMART EMAIL BUTTON
+================================= */
+
+const emailButton =
+    document.getElementById("emailButton");
+
+emailButton.addEventListener("click", function (event) {
+
+    event.preventDefault();
+
+    const email =
+        "ofuq.services26@gmail.com";
+
+    const userAgent =
+        navigator.userAgent ||
+        navigator.vendor ||
+        window.opera;
+
+
+    /* ==============================
+       ANDROID
+    ============================== */
+
+    if (/Android/i.test(userAgent)) {
+
+        const gmailApp =
+            `googlegmail://co?to=${email}`;
+
+        const mailto =
+            `mailto:${email}`;
+
+        window.location.href =
+            gmailApp;
+
+        setTimeout(function () {
+
+            window.location.href =
+                mailto;
+
+        }, 1200);
+
+        return;
+    }
+
+
+    /* ==============================
+       iPhone / iPad
+    ============================== */
+
+    if (
+        /iPhone|iPad|iPod/i.test(userAgent)
+    ) {
+
+        window.location.href =
+            `mailto:${email}`;
+
+        return;
+    }
+
+
+    /* ==============================
+       COMPUTER
+    ============================== */
+
+    window.open(
+        `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`,
+        "_blank"
+    );
+
+});
