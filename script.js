@@ -365,95 +365,147 @@ function showCopyMessage() {
 ================================= */
 
 const saveContact =
-    document.getElementById(
-        "saveContact"
-    );
+    document.getElementById("saveContact");
 
 
-saveContact.addEventListener(
-    "click",
-    () => {
+saveContact.addEventListener("click", async () => {
+
+    const name =
+        "مكتب أُفُق متعدد الخدمات";
+
+    const phone =
+        "+213673823396";
+
+    const email =
+        "ofuq.services26@gmail.com";
+
+    const address =
+        "بورقيقة – تيبازة";
+
+    const pageUrl =
+        window.location.href;
 
 
-        const name =
-            "مكتب أُفُق متعدد الخدمات";
+    /* ==============================
+       إنشاء vCard
+    ============================== */
 
-
-        const phone =
-            "+213673823396";
-
-
-        const email =
-            "ofuq.services26@gmail.com";
-
-
-        const address =
-            "بورقيقة – تيبازة";
-
-
-        const vcard =
+    const vcard =
 `BEGIN:VCARD
 VERSION:3.0
 FN:${name}
 ORG:${name}
-TEL:${phone}
-EMAIL:${email}
-ADR:;;${address};;;;
-URL:${window.location.href}
+TEL;TYPE=CELL:${phone}
+EMAIL;TYPE=INTERNET:${email}
+ADR;TYPE=WORK:;;${address};;;
+URL:${pageUrl}
 END:VCARD`;
 
 
-        const blob =
-            new Blob(
-                [vcard],
-                {
-                    type:
-                        "text/vcard;charset=utf-8"
-                }
-            );
+    /* ==============================
+       إنشاء ملف جهة الاتصال
+    ============================== */
 
-
-        const url =
-            URL.createObjectURL(
-                blob
-            );
-
-
-        const link =
-            document.createElement(
-                "a"
-            );
-
-
-        link.href =
-            url;
-
-
-        link.download =
-            "Afaq-Multiservices.vcf";
-
-
-        document.body.appendChild(
-            link
+    const blob =
+        new Blob(
+            [vcard],
+            {
+                type:
+                    "text/vcard;charset=utf-8"
+            }
         );
 
 
-        link.click();
+    const file =
+        new File(
+            [blob],
+            "Afaq-Multiservices.vcf",
+            {
+                type:
+                    "text/vcard"
+            }
+        );
 
 
-        link.remove();
+    /* ==============================
+       محاولة فتح جهة الاتصال مباشرة
+       في الأجهزة التي تدعم ذلك
+    ============================== */
 
+    if (
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({
+            files: [file]
+        })
+    ) {
 
-        setTimeout(() => {
+        try {
 
-            URL.revokeObjectURL(
-                url
-            );
+            await navigator.share({
+                files: [file],
+                title:
+                    "مكتب أُفُق متعدد الخدمات"
+            });
 
-        }, 1000);
+            return;
+
+        }
+
+        catch (error) {
+
+            /*
+               المستخدم أغلق النافذة
+            */
+
+            if (
+                error.name ===
+                "AbortError"
+            ) {
+
+                return;
+
+            }
+
+        }
 
     }
-);
+
+
+    /* ==============================
+       الطريقة الاحتياطية
+       للأجهزة التي لا تدعم المشاركة
+    ============================== */
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href =
+        url;
+
+    link.download =
+        "Afaq-Multiservices.vcf";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+
+    setTimeout(() => {
+
+        URL.revokeObjectURL(url);
+
+    }, 5000);
+
+});
 /* =================================
    SMART EMAIL BUTTON
 ================================= */
