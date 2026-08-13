@@ -361,13 +361,146 @@ function showCopyMessage() {
 
 
 /* =================================
-   SAVE CONTACT - ANDROID CHROME
+   SAVE CONTACT
 ================================= */
 
 const saveContact =
     document.getElementById("saveContact");
 
+
 saveContact.addEventListener("click", () => {
+
+    const oldPopup =
+        document.getElementById("contactPopup");
+
+    if (oldPopup) {
+        oldPopup.remove();
+    }
+
+
+    const popup =
+        document.createElement("div");
+
+    popup.id =
+        "contactPopup";
+
+
+    popup.innerHTML = `
+
+        <div class="contact-popup-box">
+
+            <button
+                class="contact-popup-close"
+                id="closeContactPopup">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+
+            <div class="contact-popup-logo">
+
+                <img
+                    src="logo.png"
+                    alt="شعار مكتب أُفُق">
+
+            </div>
+
+
+            <h2>
+                مكتب أُفُق متعدد الخدمات
+            </h2>
+
+
+            <p class="contact-popup-subtitle">
+                إضافة جهة الاتصال
+            </p>
+
+
+            <div class="contact-popup-info">
+
+                <div>
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+213 673 823 396</span>
+                </div>
+
+
+                <div>
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>
+                        ofuq.services26@gmail.com
+                    </span>
+                </div>
+
+
+                <div>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>
+                        بورقيقة – تيبازة
+                    </span>
+                </div>
+
+            </div>
+
+
+            <button
+                class="add-contact-button"
+                id="addContactButton">
+
+                <i class="fa-regular fa-address-card"></i>
+
+                إضافة إلى جهات الاتصال
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(popup);
+
+
+    /* إغلاق النافذة */
+
+    document
+        .getElementById("closeContactPopup")
+        .addEventListener("click", () => {
+
+            popup.remove();
+
+        });
+
+
+    /* الضغط خارج النافذة */
+
+    popup.addEventListener("click", (event) => {
+
+        if (event.target === popup) {
+
+            popup.remove();
+
+        }
+
+    });
+
+
+    /* زر إضافة جهة الاتصال */
+
+    document
+        .getElementById("addContactButton")
+        .addEventListener("click", () => {
+
+            createVCard();
+
+        });
+
+});
+
+
+/* =================================
+   CREATE VCARD
+================================= */
+
+function createVCard() {
 
     const name =
         "مكتب أُفُق متعدد الخدمات";
@@ -385,10 +518,6 @@ saveContact.addEventListener("click", () => {
         window.location.href;
 
 
-    /*
-       إنشاء بطاقة الاتصال
-    */
-
     const vcard =
 `BEGIN:VCARD
 VERSION:3.0
@@ -401,15 +530,11 @@ URL:${pageUrl}
 END:VCARD`;
 
 
-    /*
-       إنشاء ملف VCF
-    */
-
     const blob =
         new Blob(
             [vcard],
             {
-                type: "text/vcard"
+                type: "text/vcard;charset=utf-8"
             }
         );
 
@@ -418,49 +543,30 @@ END:VCARD`;
         URL.createObjectURL(blob);
 
 
-    /*
-       محاولة فتح تطبيق جهات الاتصال
-       في Android
-    */
-
-    const androidIntent =
-        `intent:#Intent;action=android.intent.action.VIEW;type=text/x-vcard;S.android.intent.extra.TEXT=${encodeURIComponent(vcard)};end`;
+    const link =
+        document.createElement("a");
 
 
-    /*
-       محاولة فتح Intent
-    */
+    link.href = url;
 
-    window.location.href =
-        androidIntent;
+    link.download =
+        "Afaq-Multiservices.vcf";
 
 
-    /*
-       إذا لم يستجب الجهاز،
-       نستخدم الطريقة الاحتياطية
-    */
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
 
     setTimeout(() => {
 
-        const link =
-            document.createElement("a");
-
-        link.href = url;
-
-        link.download =
-            "Afaq-Multiservices.vcf";
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        link.remove();
-
         URL.revokeObjectURL(url);
 
-    }, 1500);
+    }, 1000);
 
-});
+}
 /* =================================
    SMART EMAIL BUTTON
 ================================= */
