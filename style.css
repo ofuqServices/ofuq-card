@@ -1,0 +1,1216 @@
+/* =================================
+   GLOBAL
+================================= */
+
+:root {
+
+    --blue: #050a30;
+
+    --cream: #f2f1ec;
+
+    --white: #ffffff;
+
+    --text-light: #777b8d;
+
+    --border: rgba(5, 10, 48, .10);
+
+}
+
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background: var(--blue);
+
+    font-family: "Cairo", sans-serif;
+
+    color: var(--blue);
+
+    padding: 25px 15px;
+
+}
+
+button,
+a {
+
+    font-family: inherit;
+
+}
+
+
+
+/* =================================
+   MAIN CARD
+================================= */
+
+.business-card {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+
+    margin: auto;
+
+    padding: 30px 22px;
+
+    overflow: hidden;
+
+    background:
+        rgba(242,241,236,.88);
+
+    border:
+        1px solid
+        rgba(5,10,48,.08);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(5,10,48,.12);
+
+}
+
+
+
+/* =================================
+   DECORATION
+================================= */
+
+.decoration {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    opacity: .25;
+
+}
+
+
+.decoration-one {
+
+    width: 180px;
+
+    height: 180px;
+
+    top: -80px;
+
+    right: -70px;
+
+    background: var(--blue);
+
+    filter: blur(2px);
+
+}
+
+
+.decoration-two {
+
+    width: 140px;
+
+    height: 140px;
+
+    bottom: -70px;
+
+    left: -60px;
+
+    border:
+        1px solid
+        var(--blue);
+
+}
+
+
+
+/* =================================
+   HEADER
+================================= */
+.header {
+
+    text-align: center;
+
+    padding:
+        48px 25px 30px;
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
+
+.logo-wrapper {
+    width: 125px;
+    height: 125px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.logo-wrapper::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border:
+        1px solid
+        rgba(5,10,48,.15);
+
+    border-radius: 50%;
+}
+
+.logo-wrapper::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 8px;
+
+    border:
+        1px solid
+        rgba(5,10,48,.07);
+
+    border-radius: 50%;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+
+.welcome {
+
+    font-size: 14px;
+
+    color: var(--text-light);
+
+    margin-bottom: 4px;
+
+}
+
+
+.separator {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin: 12px 0;
+
+}
+
+
+.separator span {
+
+    width: 65px;
+
+    height: 1px;
+
+    background: var(--blue);
+
+    opacity: .25;
+
+}
+
+
+.separator i {
+
+    font-size: 10px;
+
+    color: var(--blue);
+
+}
+
+
+.intro {
+
+    font-size: 14px;
+
+    color: var(--text-light);
+
+}
+
+
+
+/* =================================
+   CONTACT
+================================= */
+
+.contact-section {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.contact-card {
+
+    min-height: 68px;
+
+    padding: 10px 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    border-radius: 17px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        rgba(255,255,255,.52);
+
+    color: var(--blue);
+
+    text-decoration: none;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+
+}
+
+
+.contact-card:hover {
+
+    background: var(--blue);
+
+    color: var(--cream);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(5,10,48,.18);
+
+}
+
+
+.contact-icon {
+
+    width: 44px;
+
+    height: 44px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: var(--blue);
+
+    color: var(--cream);
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease,
+        border .25s ease;
+
+}
+
+
+.contact-card:hover .contact-icon {
+
+    background: var(--cream);
+
+    color: var(--blue);
+
+    transform:
+        scale(1.06);
+
+}
+
+
+.contact-info {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.contact-info strong {
+
+    display: block;
+
+    font-size: 15px;
+
+    transition: color .25s ease;
+
+}
+
+
+.contact-info span {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 12px;
+
+    color: var(--text-light);
+
+    transition: color .25s ease;
+
+}
+
+
+.contact-card:hover .contact-info strong {
+
+    color: var(--cream);
+
+}
+
+
+.contact-card:hover .contact-info span {
+
+    color:
+        rgba(242,241,236,.62);
+
+}
+
+
+.arrow {
+
+    font-size: 13px;
+
+    opacity: .55;
+
+    transition:
+        transform .25s ease,
+        color .25s ease;
+
+}
+
+
+.contact-card:hover .arrow {
+
+    color: var(--cream);
+
+    transform:
+        translateX(-4px);
+
+}
+
+
+.contact-card:active {
+
+    transform:
+        scale(.98);
+
+}
+
+
+
+/* =================================
+   SERVICES MAIN BUTTON
+================================= */
+
+.services-section {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 18px;
+
+}
+
+
+.services-button {
+
+    width: 100%;
+
+    min-height: 70px;
+
+    padding: 10px 13px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: var(--blue);
+
+    color: var(--cream);
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+.services-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 28px
+        rgba(5,10,48,.20);
+
+}
+
+
+.services-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+}
+
+
+.services-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: var(--cream);
+
+    color: var(--blue);
+
+}
+
+
+.services-left strong {
+
+    display: block;
+
+    text-align: right;
+
+    font-size: 16px;
+
+}
+
+
+.services-left span {
+
+    display: block;
+
+    margin-top: 2px;
+
+    text-align: right;
+
+    font-size: 12px;
+
+    opacity: .65;
+
+}
+
+
+.services-plus {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(242,241,236,.10);
+
+}
+
+
+.services-plus i {
+
+    transition:
+        transform .35s ease;
+
+}
+
+
+.services-button.active .services-plus i {
+
+    transform:
+        rotate(45deg);
+
+}
+
+
+
+/* =================================
+   MAIN SERVICES CONTENT
+================================= */
+
+.services-content {
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    margin-top: 0;
+
+    transition:
+        max-height .55s ease,
+        opacity .35s ease,
+        margin-top .35s ease;
+
+}
+
+
+.services-content.open {
+
+    max-height: 2500px;
+
+    opacity: 1;
+
+    margin-top: 10px;
+
+}
+
+
+
+/* =================================
+   SERVICE CATEGORY
+================================= */
+
+.service-category {
+
+    overflow: hidden;
+
+    margin-bottom: 8px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 16px;
+
+    background:
+        rgba(255,255,255,.52);
+
+}
+
+
+.service-category-button {
+
+    width: 100%;
+
+    min-height: 64px;
+
+    padding: 10px 13px;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--blue);
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    text-align: right;
+
+    transition:
+        background .25s ease,
+        color .25s ease;
+
+}
+
+
+.service-category-button:hover {
+
+    background: var(--blue);
+
+    color: var(--cream);
+
+}
+
+
+.service-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 0;
+
+}
+
+
+.service-number {
+
+    width: 40px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    font-size: 20px !important;
+
+    font-weight: 700;
+
+    opacity: .60;
+
+}
+
+
+.service-title strong {
+
+    font-size: 16px;
+
+    line-height: 1.5;
+
+}
+
+
+.service-chevron {
+
+    flex-shrink: 0;
+
+    font-size: 12px;
+
+    transition:
+        transform .35s ease;
+
+}
+
+
+.service-category.active
+.service-chevron {
+
+    transform:
+        rotate(180deg);
+
+}
+
+
+
+/* =================================
+   SERVICE SUB CONTENT
+================================= */
+
+.service-category-content {
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transition:
+        max-height .45s ease,
+        opacity .30s ease;
+
+}
+
+
+.service-category.active
+.service-category-content {
+
+    max-height: 1000px;
+
+    opacity: 1;
+
+}
+
+.service-category-last .service-category-button {
+    justify-content: center;
+}
+
+.service-category-last .service-title {
+    justify-content: center;
+}
+
+.service-category-last .service-title strong {
+    text-align: center;
+}
+
+.service-description-last {
+    text-align: center;
+}
+
+.service-description-last div {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.service-description-last div::before {
+    display: none;
+}
+
+.service-description {
+
+    padding:
+        4px 20px 18px 20px;
+
+    border-top:
+        1px solid
+        var(--border);
+
+}
+
+
+.service-description div {
+
+    position: relative;
+
+    padding:
+        8px 18px 8px 0;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: var(--text-light);
+
+}
+
+
+.service-description div::before {
+
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+
+    top: 17px;
+
+    width: 5px;
+
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: var(--blue);
+
+    opacity: .55;
+
+}
+
+
+
+/* =================================
+   ACTIONS
+================================= */
+
+.actions {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+}
+
+
+.action-button {
+    min-height: 58px;
+
+    border:
+        1px solid
+        rgba(242,241,236,.25);
+
+    border-radius: 16px;
+
+    background: var(--blue);
+
+    color: var(--cream);
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    font-size: 13px;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.action-button:hover {
+    background: var(--cream);
+
+    color: var(--blue);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 22px
+        rgba(5,10,48,.20);
+}
+
+
+.action-button i {
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.action-button:hover i {
+
+    transform:
+        scale(1.12);
+
+}
+
+
+.action-button:active {
+    transform: scale(.98);
+}
+
+
+
+/* =================================
+   LOCATION
+================================= */
+
+.location {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 20px;
+
+    color: var(--text-light);
+
+    font-size: 12px;
+
+}
+
+
+.location i {
+
+    color: var(--blue);
+
+}
+
+
+
+/* =================================
+   FOOTER
+================================= */
+
+footer {
+
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+}
+
+
+.footer-line {
+
+    width: 70px;
+
+    height: 1px;
+
+    margin:
+        0 auto 12px;
+
+    background: var(--blue);
+
+    opacity: .20;
+
+}
+
+
+footer strong {
+
+    font-family: "Amiri", serif;
+
+    font-size: 16px;
+
+}
+
+
+footer p {
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color: var(--text-light);
+
+}
+
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 480px) {
+
+    body {
+
+        padding: 12px 9px;
+
+    }
+
+
+    .business-card {
+
+        padding:
+            24px 14px;
+
+        border-radius: 24px;
+
+    }
+
+
+    .header h1 {
+
+        font-size: 25px;
+
+    }
+
+
+    .logo-wrapper {
+
+        width: 105px;
+
+        height: 105px;
+
+    }
+
+
+    .service-title strong {
+
+        font-size: 14px;
+
+    }
+
+
+    .service-number {
+
+        width: 34px;
+
+        font-size: 18px !important;
+
+    }
+
+
+    .service-description {
+
+        padding-right: 14px;
+
+        padding-left: 14px;
+
+    }
+
+
+    .service-description div {
+
+        font-size: 12px;
+
+        line-height: 1.8;
+
+    }
+
+
+    .actions {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+/* =================================
+   MAIN TITLE
+================================= */
+
+.main-title {
+    margin: 8px 0 10px;
+
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    font-family: "Amiri", serif !important;
+
+    font-size: 28px !important;
+
+    line-height: 1.5;
+
+    font-weight: 700;
+
+    color: #050a30;
+}
+
+
+/* الكلمات العادية */
+
+.title-normal {
+    font-family: "Amiri", serif !important;
+
+    font-size: 27px !important;
+
+    font-weight: 700;
+}
+
+
+/* أُفُق */
+
+.title-brand {
+    font-family: "Amiri", serif !important;
+
+    font-size: 38px !important;
+
+    font-weight: 700;
+
+    color: #050a30;
+
+    position: relative;
+
+    display: inline-block;
+}
+
+
+/* الخط الزخرفي تحت أُفُق */
+
+.title-brand::after {
+    content: "";
+
+    position: absolute;
+
+    left: 8px;
+    right: 8px;
+
+    bottom: -3px;
+
+    height: 2px;
+
+    background: #050a30;
+
+    border-radius: 50%;
+}
